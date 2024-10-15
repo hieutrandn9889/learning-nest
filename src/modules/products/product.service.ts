@@ -46,7 +46,15 @@ export class ProductService {
         return this.products[index];
     }
   
-    deleteProducts(): string {
-        return 'DELETE PRODUCT';
+    // truyen id tra ve boolean
+    deleteProducts(id:number): boolean {
+        const index = this.products.findIndex(item => item.id=== Number(id));
+        // dk index khac -1 se tim index tai dung vi tri splice
+        if (index!==-1) {
+            this.products.splice(index, 1);
+            return true;     
+        }
+        return false
+        
     }
 }
