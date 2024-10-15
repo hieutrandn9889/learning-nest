@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Param, Body, ValidationPipe } from "@nestjs/common";
 import {ProductService} from "./product.service",
 import {ResponseData} from "src/global/globalClass"
 import {HttpMessage, HttpStatus} from "src/global/globalEnum"
@@ -23,9 +23,10 @@ export class ProductController{
     createProduct(@Body() productDto:ProductDto): ResponseData<ProductDto> {
 
         try {
-            return new ResponseData<ProductDto>( productDto, HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+            // hứng request từ client (productDto) và ResponseData<Product> trả về 1 đối tượng 
+            return new ResponseData<Product>( this.productService.createProduct(productDto), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
         } catch (error) {
-            return new ResponseData<ProductDto>( null, HttpStatus.ERROR, HttpMessage.ERROR);
+            return new ResponseData<Product>( null, HttpStatus.ERROR, HttpMessage.ERROR);
         }
     }
 
@@ -40,11 +41,12 @@ export class ProductController{
     }
     
     @Put('/:id')
-    updateProducts(): ResponseData<string> {
+    // truyền 1 param id
+    updateProducts(@Body() productDto:ProductDto, @Param('id') id: number): ResponseData<Product> {
         try {
-            return new ResponseData<string>( this.productService.updateProducts(), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+            return new ResponseData<Product>( this.productService.updateProducts(productDto, id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
         } catch (error) {
-            return new ResponseData<string>( null, HttpStatus.ERROR, HttpMessage.ERROR);
+            return new ResponseData<Product>( null, HttpStatus.ERROR, HttpMessage.ERROR);
         }
     }
 
