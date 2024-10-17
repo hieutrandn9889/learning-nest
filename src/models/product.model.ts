@@ -1,20 +1,20 @@
 export class Product {
     id?: number;
-    categoryId?:number;
-    productName?:string;
-    price?:number;
+    categoryId?: number;
+    productName?: string;
+    price?: number;
 
-    constructor({id, categoryId, productName, price}) {
-        if (id!==null) {
+    constructor({ id, categoryId, productName, price }) {
+        if (id !== null) {
             this.id = id;
         }
-        if (categoryId!==null) {
+        if (categoryId !== null) {
             this.categoryId = categoryId;
         }
-        if (productName!==null) {
+        if (productName !== null) {
             this.productName = productName;
         }
-        if (price!==null) {
+        if (price !== null) {
             this.price = price;
         }
     }
