@@ -58,7 +58,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Resources
+## Resources  
 
 Check out a few resources that may come in handy when working with NestJS:
 
