@@ -4,10 +4,15 @@ import { ResponseData } from "src/global/globalClass";
 import { HttpMessage, HttpStatus } from "src/global/globalEnum";
 import { ResponseType } from "src/global/globalType";
 import { Category } from "src/models/category.model";
+import { CategoryService } from "./category.services";
 
 //categories
 @Controller('categories')
 export class CategoryController {
+
+    //sử dụng serivce thì nhúng vào
+    constructor(private categoryService: CategoryService) { }
+
 
     @Get()
 
@@ -16,9 +21,12 @@ export class CategoryController {
     // ResponseType truyền model category
     async list(@Res() res: Response): Promise<ResponseType<Category>> {
         try {
-            return res.json(new ResponseData([], HttpStatus.SUCCESS, HttpMessage.SUCCESS))
+            return res.json(
+                new ResponseData(await this.categoryService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+            );
         } catch (error) {
-            return res.json(new ResponseData(null, HttpStatus.SUCCESS, HttpMessage.SUCCESS))
+            return res.json(new ResponseData(null, HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+            );
         }
     }
 }
