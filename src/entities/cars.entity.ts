@@ -3,6 +3,7 @@ import { CategoriesEntity } from "./categories.entity";
 
 @Entity('cars')
 export class CarsEntity extends BaseEntity{
+    
     // xac dinh id la khoa chinh
     // nhiều chiếc xe phụ thuộc 1 loại xe
     @PrimaryGeneratedColumn()

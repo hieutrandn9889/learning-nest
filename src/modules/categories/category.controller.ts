@@ -15,7 +15,6 @@ export class CategoryController {
 
 
     @Get()
-
     // Res trả lại cho response
     // ở đây dùng async vì lấy data ở  db nên gây ra tình trạng bất đồng bộ nên sử dụng promise
     // ResponseType truyền model category
@@ -28,5 +27,9 @@ export class CategoryController {
             return res.json(new ResponseData(null, HttpStatus.SUCCESS, HttpMessage.SUCCESS)
             );
         }
+    }
+
+    @Get('/:id')
+    async detail(@Param('id')id: number, @Res()res:Response): Promise<ResponseType<Category>> {
     }
 }
