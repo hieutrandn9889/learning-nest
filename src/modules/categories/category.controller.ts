@@ -18,14 +18,18 @@ export class CategoryController {
     // Res trả lại cho response
     // ở đây dùng async vì lấy data ở  db nên gây ra tình trạng bất đồng bộ nên sử dụng promise
     // ResponseType truyền model category
-    async list(@Res() res: Response): Promise<ResponseType<Category>> {
+    @Get()
+    // Res trả lại cho response
+    // ở đây dùng async vì lấy data ở  db nên gây ra tình trạng bất đồng bộ nên sử dụng promise
+    // ResponseType truyền model category
+    async list(@Res() res: Response): Promise<ResponseType<Category[]>> {
         try {
             return res.json(
-                new ResponseData(await this.categoryService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS),
+                new ResponseData<Category[]>(await this.categoryService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS),
             );
         } catch (error) {
             return res.json(
-                new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR),
+                new ResponseData<Category[]>(null, HttpStatus.ERROR, HttpMessage.ERROR),
             );
         }
     }
