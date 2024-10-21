@@ -19,7 +19,7 @@ export class CategoryService {
     }
 
     // lấy từng id của category
-    async findById(id: number): Promise<Category[]> {
+    async findById(id: number): Promise<Category> {
         return await this.categoryRepository.findOne({where: {id}});
      }
 }
