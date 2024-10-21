@@ -13,11 +13,6 @@ export class CategoryController {
     //sử dụng serivce thì nhúng vào
     constructor(private categoryService: CategoryService) { }
 
-
-    @Get()
-    // Res trả lại cho response
-    // ở đây dùng async vì lấy data ở  db nên gây ra tình trạng bất đồng bộ nên sử dụng promise
-    // ResponseType truyền model category
     @Get()
     // Res trả lại cho response
     // ở đây dùng async vì lấy data ở  db nên gây ra tình trạng bất đồng bộ nên sử dụng promise
