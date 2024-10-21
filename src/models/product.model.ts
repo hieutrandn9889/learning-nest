@@ -2,7 +2,7 @@ export class Product {
     id?: number;
     categoryId?: number;
     productName?: string;
-    price?: string;
+    price?: number;
 
     constructor({ id, categoryId, productName, price }) {
         if (id !== null) {
