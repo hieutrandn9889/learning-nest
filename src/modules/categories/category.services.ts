@@ -17,4 +17,9 @@ export class CategoryService {
     async findAll(): Promise<Category[]> {
        return await this.categoryRepository.find();
     }
+
+    // lấy từng danh sách của category
+    async findById(id: number): Promise<Category[]> {
+        return await this.categoryRepository.findOne({where: {id}});
+     }
 }

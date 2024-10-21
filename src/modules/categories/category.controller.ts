@@ -21,15 +21,24 @@ export class CategoryController {
     async list(@Res() res: Response): Promise<ResponseType<Category>> {
         try {
             return res.json(
-                new ResponseData(await this.categoryService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+                new ResponseData(await this.categoryService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS),
             );
         } catch (error) {
-            return res.json(new ResponseData(null, HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+            return res.json(
+                new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR),
             );
         }
     }
 
     @Get('/:id')
     async detail(@Param('id')id: number, @Res()res:Response): Promise<ResponseType<Category>> {
+        try {
+            return res.json(
+                new ResponseData(await this.categoryService.findById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+            );
+        } catch (error) {
+            return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
+            );
+        }
     }
 }
