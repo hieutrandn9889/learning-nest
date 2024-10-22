@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Res } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Param, Body, Res, ValidationPipe } from "@nestjs/common";
 import { Response } from "express";
 import { ResponseData } from "src/global/globalClass";
 import { HttpMessage, HttpStatus } from "src/global/globalEnum";
 import { ResponseType } from "src/global/globalType";
 import { Category } from "src/models/category.model";
 import { CategoryService } from "./category.services";
+import { CategoryDto } from "src/dto/category.dto";
 
 //categories
 @Controller('categories')
@@ -30,7 +31,7 @@ export class CategoryController {
     }
 
     @Get('/:id')
-    async detail(@Param('id')id: number, @Res()res:Response): Promise<ResponseType<Category>> {
+    async detail(@Param('id') id: number, @Res() res: Response): Promise<ResponseType<Category>> {
         try {
             return res.json(
                 new ResponseData(await this.categoryService.findById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
@@ -40,4 +41,58 @@ export class CategoryController {
             );
         }
     }
+
+    // tạo một category cần phải có dto đầu tiên
+    @Post()
+    async create(@Body(new ValidationPipe()) category: CategoryDto, @Res() res: Response): Promise<ResponseType<Category>> {
+        try {
+            return res.json(
+                new ResponseData(await this.categoryService.create(category), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+            );
+        } catch (error) {
+            return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
+            );
+        }
+    }
+
+    // PUT
+    @Put('/:id')
+    async update(
+        @Param('id') id: number,
+        @Body(new ValidationPipe()) category: CategoryDto,
+        @Res() res: Response): Promise<ResponseType<Category>> {
+        try {
+            return res.json(
+                new ResponseData(await this.categoryService.update(id, category), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+            );
+        } catch (error) {
+            return res.json(
+                new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
+            );
+        }
+    }
+
+    // DELETE: nếu delete đc thì trả cho client là true còn k delete đc thì là false
+    @Delete('/:id')
+    async delete(
+        @Param('id') id: number,
+        @Res() res: Response): Promise<ResponseType<Category>> {
+        try {
+            const isFlag: boolean = await this.categoryService.delete(id);
+            if (isFlag) {
+                return res.json(
+                    new ResponseData(isFlag, HttpStatus.SUCCESS, HttpMessage.SUCCESS),
+                );
+            } else {
+                return res.json(
+                    new ResponseData(isFlag, HttpStatus.ERROR, HttpMessage.ERROR),
+                );
+            }
+        } catch (error) {
+            return res.json(
+                new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
+            );
+        }
+    }
+
 }
