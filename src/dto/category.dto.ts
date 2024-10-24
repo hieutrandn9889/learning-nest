@@ -1,6 +1,5 @@
 import {IsString, MinLength} from 'class-validator'
 
-
 export class CategoryDto{
 
     // it nhat 5 ky tu > bao loi

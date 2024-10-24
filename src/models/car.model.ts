@@ -1,4 +1,4 @@
-export class Category {
+export class Car {
     id?: number;
     productName?: string;
     price?: string;
