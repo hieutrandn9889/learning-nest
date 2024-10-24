@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn , ManyToOne, JoinColumn} from "typeorm";
 import { CategoriesEntity } from "./categories.entity";
+import { LogosEntity } from "./logos.entity";
 
 @Entity('cars')
 export class CarsEntity extends BaseEntity{
@@ -22,5 +23,10 @@ export class CarsEntity extends BaseEntity{
     @ManyToOne(()=> CategoriesEntity)
     @JoinColumn()
     category: CategoriesEntity;
+
+    // lấy ra đối tượng logo
+    @ManyToOne(()=> LogosEntity)
+    @JoinColumn()
+    logo: LogosEntity;
 
 }
