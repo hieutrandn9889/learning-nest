@@ -11,6 +11,7 @@ import { AccountsEntity } from './entities/accounts.entity';
 import { CarModule } from './modules/cars/car.module';
 import { LogoModule } from './modules/logos/logo.module';
 import { LogosEntity } from './entities/logos.entity';
+import { BrandModule } from './modules/brands/brand.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { LogosEntity } from './entities/logos.entity';
     CategoryModule,
     CarModule,
     LogoModule,
+    BrandModule,
   ],
   controllers: [AppController],
   providers: [AppService],
