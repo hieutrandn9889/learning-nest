@@ -15,7 +15,7 @@ export class ColorController {
     constructor(private colorService: ColorService) { }
 
 
-    // Get all car
+    // Get all color
     @Get()
     async list(@Res() res: Response): Promise<ResponseType<Color[]>> {
         try {
@@ -29,7 +29,7 @@ export class ColorController {
         }
     }
 
-    // Get a car
+    // Get a color
     @Get('/:id')
     async detail(@Param('id') id: number, @Res() res: Response): Promise<ResponseType<Color>> {
         try {
@@ -44,10 +44,10 @@ export class ColorController {
 
     //POST
     @Post()
-    async create(@Body(new ValidationPipe()) car: ColorDto, @Res() res: Response): Promise<ResponseType<Color>> {
+    async create(@Body(new ValidationPipe()) color: ColorDto, @Res() res: Response): Promise<ResponseType<Color>> {
         try {
             return res.json(
-                new ResponseData(await this.colorService.create(car), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+                new ResponseData(await this.colorService.create(color), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
             );
         } catch (error) {
             return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
@@ -59,11 +59,11 @@ export class ColorController {
     @Put('/:id')
     async update(
         @Param('id') id: number,
-        @Body(new ValidationPipe()) car: ColorDto,
+        @Body(new ValidationPipe()) color: ColorDto,
         @Res() res: Response): Promise<ResponseType<Color>> {
         try {
             return res.json(
-                new ResponseData(await this.colorService.update(id, car), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+                new ResponseData(await this.colorService.update(id, color), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
             );
         } catch (error) {
             return res.json(
