@@ -1,11 +1,11 @@
 export class Category {
   id?: number;
   categoryName?: string;
-  description?: string;
+  categoryDescription?: string;
 
-  constructor({ id, categoryName, description }) {
+  constructor({ id, categoryName, categoryDescription }) {
     if (id !== undefined) this.id = id;
     if (categoryName !== undefined) this.categoryName = categoryName;
-    if (description !== undefined) this.description = description;
+    if (categoryDescription !== undefined) this.categoryDescription = categoryDescription;
   }
 }

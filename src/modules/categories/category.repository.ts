@@ -21,7 +21,7 @@ export class CategoryRepository implements ICategoryRepository {
 
     // get a category
     async findById(id: number): Promise<Category> {
-        return await this.categoryRepository.findOne({where: {id}});
+        return await this.categoryRepository.findOne({where: {id}, relations:['cars']});
      }
 
     // create a category

@@ -21,7 +21,7 @@ export class CarsEntity extends BaseEntity{
 
     // lấy ra đối tượng category
     @ManyToOne(()=> CategoriesEntity)
-    @JoinColumn()
+    @JoinColumn({name:'category_id', referencedColumnName:'id'})
     category: CategoriesEntity;
 
     // lấy ra đối tượng logo

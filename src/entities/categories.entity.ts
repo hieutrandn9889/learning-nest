@@ -13,7 +13,7 @@ export class CategoriesEntity extends BaseEntity{
     categoryName: string;
 
     @Column()
-    description: string;
+    categoryDescription: string;
 
     // lấy ra danh sách xe
     // trỏ đến () => CarsEntity và lấy đc đối tượng category của cars

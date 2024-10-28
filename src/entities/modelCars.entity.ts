@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
 import { ColorsEntity } from "./colors.entity";
 
-@Entity('models')
+@Entity('modelCars')
 export class ModelCarsEntity extends BaseEntity{
 
     // xac dinh id la khoa chinh
