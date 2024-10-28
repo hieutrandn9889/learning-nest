@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoriesEntity } from 'src/entities/categories.entity';
 import { ICategoryRepository } from 'src/interfaces/ICategoryRepository';
@@ -6,29 +6,27 @@ import { Category } from 'src/models/category.model';
 import { DeleteResult, Repository } from "typeorm";
 
 @Injectable()
-export class CategoryService {
+export class CategoryRepository implements ICategoryRepository {
 
     //kết nối database => lấy data của categories entity => bắt buộc phải có resp của typeorm
     constructor(
-        @Inject('ICategoryRepository')
-
-        // khởi tạo interface ICategoryRepository
-        private readonly categoryRepository: ICategoryRepository
+        @InjectRepository(CategoriesEntity) 
+        private categoryRepository: Repository<CategoriesEntity>,
     ) {}
 
     // get all category
     async findAll(): Promise<Category[]> {
-       return await this.categoryRepository.findAll();
+       return await this.categoryRepository.find();
     }
 
     // get a category
     async findById(id: number): Promise<Category> {
-        return await this.categoryRepository.findById(id);
+        return await this.categoryRepository.findOne({where: {id}});
      }
 
     // create a category
     async create(category: Category): Promise<Category> {
-        return await this.categoryRepository.create(category);
+        return await this.categoryRepository.save(category);
      }
 
     // update a category
@@ -43,12 +41,15 @@ export class CategoryService {
 
     // delete a category
     async delete(id: number): Promise<boolean> {
+
+        const isFlag: DeleteResult = await this.categoryRepository.delete(id);
+
         // trả lại data khi isFlag.affected === 1 
         // if (isFlag) {
         //     return true
         // }else{
         //     return false
         // }
-        return await this.categoryRepository.delete(id)
+        return isFlag.affected === 1;
      }
 }
