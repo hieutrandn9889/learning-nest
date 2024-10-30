@@ -12,7 +12,7 @@ import { CategoryDto } from "src/dto/category.dto";
 export class CategoryController {
 
     //sử dụng serivce thì nhúng vào
-    constructor(private categoryService: CategoryService) { }
+    constructor(private readonly categoryService: CategoryService) { }
 
     @Get()
     // Res trả lại cho response

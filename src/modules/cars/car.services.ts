@@ -1,31 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CarsEntity } from 'src/entities/cars.entity';
+import { Inject, Injectable } from '@nestjs/common';
+import { ICarRepository } from 'src/interfaces/ICarRepository';
 import { Car } from 'src/models/car.model';
-import { DeleteResult, Repository } from "typeorm";
 
 @Injectable()
 export class CarService {
 
     //kết nối database => lấy data của categories entity => bắt buộc phải có resp của typeorm
     constructor(
-        @InjectRepository(CarsEntity) 
-        private carRepository: Repository<CarsEntity>,
+        @Inject('ICarRepository')
+        private readonly carRepository: ICarRepository
     ) {}
 
     // get all car
     async findAll(): Promise<Car[]> {
-       return await this.carRepository.find();
+       return await this.carRepository.findAll();
     }
 
     // get a car
     async findById(id: number): Promise<Car> {
-        return await this.carRepository.findOne({where: {id}});
+        return await this.carRepository.findById(id);
      }
 
     // create a car
     async create(car: Car): Promise<Car> {
-        return await this.carRepository.save(car);
+        return await this.carRepository.create(car);
      }
 
     // update a car
@@ -40,15 +38,10 @@ export class CarService {
 
     // delete a car
     async delete(id: number): Promise<boolean> {
+        return await this.carRepository.delete(id);
+     }
 
-        const isFlag: DeleteResult = await this.carRepository.delete(id);
-
-        // trả lại data khi isFlag.affected === 1 
-        // if (isFlag) {
-        //     return true
-        // }else{
-        //     return false
-        // }
-        return isFlag.affected === 1;
+     async findRelationById(id: number): Promise<Car> {
+        return await this.carRepository.findRelationById(id);
      }
 }

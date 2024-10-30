@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoriesEntity } from 'src/entities/categories.entity';
 import { BaseRepository } from 'src/interfaces/BaseRepository';
-import { ICarRepository } from 'src/interfaces/ICarRepository';
+import { ICategoryRepository } from 'src/interfaces/ICategoryRepository';
 import { Repository } from "typeorm";
 
 @Injectable()
-export class CategoryRepository extends BaseRepository<CategoriesEntity, Repository<CategoriesEntity>> implements ICarRepository {
+export class CategoryRepository extends BaseRepository<CategoriesEntity, Repository<CategoriesEntity>> implements ICategoryRepository {
 
     //kết nối database => lấy data của categories entity => bắt buộc phải có resp của typeorm
     constructor(

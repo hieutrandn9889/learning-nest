@@ -12,7 +12,7 @@ import { CarDto } from "src/dto/car.dto";
 export class CarController {
 
     //sử dụng serivce thì nhúng vào
-    constructor(private carService: CarService) { }
+    constructor(private readonly carService: CarService) { }
 
 
     // Get all car
@@ -91,6 +91,17 @@ export class CarController {
         } catch (error) {
             return res.json(
                 new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
+            );
+        }
+    }
+    @Get('/relations/:id')
+    async findRelationById(@Param('id')id: number, @Res() res:Response){
+        try {
+            return res.json(
+                new ResponseData(await this.carService.findRelationById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+            );
+        } catch (error) {
+            return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
             );
         }
     }
