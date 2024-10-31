@@ -1,30 +1,36 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { ICarRepository } from 'src/interfaces/ICarRepository';
-import { Car } from 'src/models/car.model';
+import { Injectable } from '@nestjs/common';
+import { AuthPayloadDto, AuthPermission, AuthResponseDto } from 'src/dto/auth.dto';
 
 @Injectable()
 export class AuthService {
 
-    //kết nối database => lấy data của categories entity => bắt buộc phải có resp của typeorm
-    constructor(
-        @Inject('ICarRepository')
-        private readonly carRepository: ICarRepository
-    ) {}
+   // signIn
+   async signIn(auth: AuthPayloadDto): Promise<AuthPermission | boolean> {
 
-    // get all car
-    async findAll(): Promise<Car[]> {
-       return await this.carRepository.findAll();
-    }
+      // toan tử ditractory
+      const { username, password } = auth;
 
-    // get a car
-    async findById(id: number): Promise<Car> {
-        return await this.carRepository.findById(id);
-     }
+      //ĐK
+      if (!username || !password) return false;
+      const isAuth = await this.authRepository.signIn(auth);
+      if (!isAuth) return false;
+      return isAuth
+   }
 
-    // create a car
-    async create(car: Car): Promise<Car> {
-        return await this.carRepository.create(car);
-     }
+   // signUp
+   async signUp(auth: AuthPayloadDto): Promise<AuthResponseDto | boolean> {
 
-   
+      // toan tử ditractory
+      const { username, password } = auth;
+
+      //ĐK
+      if (!username || !password) return false;
+
+      // Khi signUp k có ID(AuthPayloadDto) nhưng trả về lại có ID(AuthResponseDto)
+      // Tạo 1 đối tượng AuthResponseDto
+      const userDto: AuthResponseDto = new AuthResponseDto(await this.authRepository.signIn(auth));
+      return userDto;
+   }
+
+
 }

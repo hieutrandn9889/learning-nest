@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Res, ValidationPipe } from "@nestjs/common";
+import { Controller, Post, Body, Res } from "@nestjs/common";
 import { Response } from "express";
 import { ResponseData } from "src/global/globalClass";
 import { HttpMessage, HttpStatus } from "src/global/globalEnum";
@@ -46,5 +46,4 @@ export class AuthController {
             );
         }
     }
-
 }
