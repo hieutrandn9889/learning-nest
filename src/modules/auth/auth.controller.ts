@@ -5,6 +5,7 @@ import { HttpMessage, HttpStatus } from "src/global/globalEnum";
 import { ResponseType } from "src/global/globalType";
 import { AuthService } from "./auth.services";
 import { AuthPayloadDto, AuthPermission, AuthResponseDto } from "src/dto/auth.dto";
+import { Public } from "src/constant/decorator";
 
 //auth
 @Controller('auth')
@@ -14,6 +15,7 @@ export class AuthController {
      constructor(protected readonly authService: AuthService) { }
 
     //POST signIn
+    @Public()
     @Post('/signIn')
     async signIn(@Body() auth: AuthPayloadDto, @Res() res: Response): Promise<ResponseType<AuthPermission | boolean>> {
         try {

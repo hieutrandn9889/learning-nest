@@ -6,6 +6,7 @@ import { Role } from 'src/global/globalEnum';
 import { IAuthRepository } from 'src/interfaces/IAuthRepository';
 import { Repository } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class AuthRepository implements IAuthRepository {
@@ -14,10 +15,28 @@ export class AuthRepository implements IAuthRepository {
     constructor(
         @InjectRepository(AccountsEntity)
         protected readonly repository: Repository<AccountsEntity>,
+        private readonly jwtService:JwtService,
     ) {
     }
+
+
     async signIn(body: AuthPayloadDto): Promise<AuthPermission | boolean> {
-        return false;
+        const {username, password} = body;
+
+        // check username có tồn tại k
+        const userAuth = await this.repository.findOne({where:{username}});
+        if (!userAuth)  return false;
+        const isMatch = await bcrypt.compare(password, userAuth.password)
+        if(!isMatch) return false;
+
+        // khởi tạo payload và sử dụng AuthResponseDto gởi về client thông tin, token
+        const payload = {...new AuthResponseDto(userAuth)} ;   
+        return new AuthPermission({
+            id: userAuth.id,
+            token: await this.jwtService.signAsync(payload),
+            expiredTime: 900000
+        })
+        
     }
 
     async signUp(body: AuthPayloadDto): Promise<AuthResponseDto> {
