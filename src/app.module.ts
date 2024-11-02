@@ -10,6 +10,7 @@ import { CarsEntity } from './entities/cars.entity';
 import { AccountsEntity } from './entities/accounts.entity';
 import { CarModule } from './modules/cars/car.module';
 import { BrandModule } from './modules/brands/brand.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { BrandModule } from './modules/brands/brand.module';
     CategoryModule,
     CarModule,
     BrandModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

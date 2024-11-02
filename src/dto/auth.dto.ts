@@ -1,7 +1,7 @@
 export class AuthResponseDto {
-    id?: number;
-    username?: string;
-    permission?: string;
+    id: number;
+    username: string;
+    permission: string;
     constructor({ id, username, permission }) {
         this.id = id;
         this.username = username;

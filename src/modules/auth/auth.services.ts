@@ -1,8 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { AuthPayloadDto, AuthPermission, AuthResponseDto } from 'src/dto/auth.dto';
+import { IAuthRepository } from 'src/interfaces/IAuthRepository';
 
 @Injectable()
 export class AuthService {
+
+   constructor(
+      @Inject('IAuthRepository')
+      protected readonly authRepository: IAuthRepository
+   ) { }
 
    // signIn
    async signIn(auth: AuthPayloadDto): Promise<AuthPermission | boolean> {
@@ -28,7 +34,8 @@ export class AuthService {
 
       // Khi signUp k có ID(AuthPayloadDto) nhưng trả về lại có ID(AuthResponseDto)
       // Tạo 1 đối tượng AuthResponseDto
-      const userDto: AuthResponseDto = new AuthResponseDto(await this.authRepository.signIn(auth));
+      // authRepository với id, username, permission k phải optional
+      const userDto: AuthResponseDto = new AuthResponseDto(await this.authRepository.signUp(auth));
       return userDto;
    }
 

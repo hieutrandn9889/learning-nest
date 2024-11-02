@@ -21,14 +21,15 @@ export class AuthController {
             const isAuth = await this.authService.signIn(auth);
             if (!isAuth) {
                 new ResponseData(isAuth, HttpStatus.ERROR, HttpMessage.ERROR)
-            }
-            return res.json(new ResponseData(isAuth, HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+            };
+            return res.json(new ResponseData(isAuth, HttpStatus.SUCCESS, HttpMessage.SUCCESS));
 
         } catch (error) {
             return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
             );
         }
     }
+
 
     // POST signUp
     @Post('/signUp')
@@ -39,7 +40,7 @@ export class AuthController {
             if (!isAuth) {
                 new ResponseData(isAuth, HttpStatus.ERROR, HttpMessage.ERROR)
             }
-            return res.json(new ResponseData(isAuth, HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+            return res.json(new ResponseData(isAuth, HttpStatus.SUCCESS, HttpMessage.SUCCESS));
 
         } catch (error) {
             return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
