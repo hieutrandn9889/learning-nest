@@ -3,9 +3,9 @@ import { ProductDto } from 'src/dto/product.dto';
 import { Product  } from 'src/models/product.model';
 
 @Injectable()
-export class ProductService {
+export class ProductOldService {
     // method: Product
-    private products:Product[]= [
+    private readonly products:Product[]= [
         {id:1, categoryId:2, price:80000, productName:"Keyboard"},
         {id:2, categoryId:3, price:90000, productName:"Hieu Tran"}
     ]

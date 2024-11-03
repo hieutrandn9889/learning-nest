@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductModule } from './modules/products/product.module';
+import { ProductOldModule } from './modules/productsOld/productOld.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { CategoryModule } from './modules/categories/category.module';
@@ -34,7 +34,7 @@ import { RolesGuard } from './modules/auth/roles.guard';
       secret: jwtConstants.secret,
       signOptions:{ expiresIn: 900000 }
     }),
-    ProductModule,
+    ProductOldModule,
     CategoryModule,
     CarModule,
     BrandModule,

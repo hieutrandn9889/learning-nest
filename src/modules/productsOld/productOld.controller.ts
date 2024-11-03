@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, ValidationPipe } from "@nestjs/common";
-import { ProductService } from "./product.service";
+import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common";
+import { ProductOldService } from "./productOld.service";
 import { ResponseData } from "src/global/globalClass";
 import { HttpMessage, HttpStatus } from "src/global/globalEnum";
 import { Product } from "src/models/product.model";
 import { ProductDto } from "src/dto/product.dto";
+import { Public } from "src/constant/decorator";
 
-@Controller('products')
-export class ProductController {
+@Controller('productsOld')
+export class ProductOldController {
     // create a constructor ProductService
-    constructor(private readonly productService: ProductService) { }
+    constructor(private readonly productService: ProductOldService) { }
 
+    @Public()
     @Get()
     getProducts(): ResponseData<Product[]> {
         try {
@@ -19,6 +21,7 @@ export class ProductController {
         }
     }
 
+    @Public()
     @Post()
     createProduct(@Body() productDto: ProductDto): ResponseData<ProductDto> {
 
@@ -30,6 +33,7 @@ export class ProductController {
         }
     }
 
+    @Public()
     @Get('/:id')
     // @Param('id') id:number ==> mang giá trị là string nên vào this.productService.detailProduct(id) nó đang string nên cần parse sang number
     detailProduct(@Param('id') id: number): ResponseData<Product> {
@@ -40,6 +44,7 @@ export class ProductController {
         }
     }
 
+    @Public()
     @Put('/:id')
     // truyền 1 param id
     updateProducts(@Body() productDto: ProductDto, @Param('id') id: number): ResponseData<Product> {
@@ -50,6 +55,7 @@ export class ProductController {
         }
     }
 
+    @Public()
     @Delete('/:id')
     // hứng 1 param
     deleteProducts(@Param('id') id: number): ResponseData<boolean> {
