@@ -34,6 +34,7 @@ export class AuthController {
 
 
     // POST signUp
+    @Public()
     @Post('/signUp')
     async signUp(@Body() auth: AuthPayloadDto, @Res() res: Response): Promise<ResponseType<AuthResponseDto | boolean>> {
         try {

@@ -15,6 +15,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constant/constant';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/auth.guard';
+import { RolesGuard } from './modules/auth/roles.guard';
 
 @Module({
   imports: [
@@ -42,14 +43,20 @@ import { AuthGuard } from './modules/auth/auth.guard';
   controllers: [AppController],
   providers: [
     AppService,
+     // jwt for global
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
+    },
+     // roles permission
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     }
 
   ],
 })
 
 export class AppModule {
-  constructor(private dataSource: DataSource) { }
+  constructor(private readonly dataSource: DataSource) { }
 }

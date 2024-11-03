@@ -1,11 +1,12 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, Res, ValidationPipe } from "@nestjs/common";
 import { Response } from "express";
 import { ResponseData } from "src/global/globalClass";
-import { HttpMessage, HttpStatus } from "src/global/globalEnum";
+import { HttpMessage, HttpStatus, Role } from "src/global/globalEnum";
 import { ResponseType } from "src/global/globalType";
 import { Car } from "src/models/car.model";
 import { CarService } from "./car.services";
 import { CarDto } from "src/dto/car.dto";
+import { Roles } from "src/constant/decorator";
 
 //cars
 @Controller('cars')
@@ -17,6 +18,7 @@ export class CarController {
 
     // Get all car
     @Get()
+    @Roles(Role.Admin)
     async list(@Res() res: Response): Promise<ResponseType<Car[]>> {
         try {
             return res.json(
