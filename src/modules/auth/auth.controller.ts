@@ -50,4 +50,22 @@ export class AuthController {
             );
         }
     }
+
+    // POST signUpAdmin
+    @Public()
+    @Post('/signUpAdmin')
+    async signUpAdmin(@Body() auth: AuthPayloadDto, @Res() res: Response): Promise<ResponseType<AuthResponseDto | boolean>> {
+        try {
+
+            const isAuth = await this.authService.signUpAdmin(auth);
+            if (!isAuth) {
+                new ResponseData(isAuth, HttpStatus.ERROR, HttpMessage.ERROR)
+            }
+            return res.json(new ResponseData(isAuth, HttpStatus.SUCCESS, HttpMessage.SUCCESS));
+
+        } catch (error) {
+            return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
+            );
+        }
+    }
 }

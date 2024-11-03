@@ -3,4 +3,5 @@ import { AuthPayloadDto, AuthPermission, AuthResponseDto } from "src/dto/auth.dt
 export interface IAuthRepository{
     signIn(body:AuthPayloadDto): Promise<AuthPermission | boolean>;
     signUp(body:AuthPayloadDto): Promise<AuthResponseDto>;
+    signUpAdmin(body:AuthPayloadDto): Promise<AuthResponseDto>;
 }

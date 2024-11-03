@@ -15,10 +15,9 @@ export class CarController {
     //sử dụng serivce thì nhúng vào
     constructor(private readonly carService: CarService) { }
 
-
     // Get all car
     @Get()
-    @Roles(Role.Admin)
+    @Roles(Role.Admin, Role.User)
     async list(@Res() res: Response): Promise<ResponseType<Car[]>> {
         try {
             return res.json(
@@ -33,6 +32,7 @@ export class CarController {
 
     // Get a car
     @Get('/:id')
+    @Roles(Role.User)
     async detail(@Param('id') id: number, @Res() res: Response): Promise<ResponseType<Car>> {
         try {
             return res.json(

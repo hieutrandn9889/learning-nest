@@ -39,7 +39,7 @@ export class AuthRepository implements IAuthRepository {
         
     }
 
-    async signUp(body: AuthPayloadDto): Promise<AuthResponseDto> {
+    async signUpAdmin(body: AuthPayloadDto): Promise<AuthResponseDto> {
         // Get username and password từ AuthPayloadDto
         const {username, password} = body;
         const salt = await bcrypt.genSalt();
@@ -48,6 +48,18 @@ export class AuthRepository implements IAuthRepository {
             username,
             password: hash,
             permission: Role.Admin
+        })
+    }
+    
+    async signUp(body: AuthPayloadDto): Promise<AuthResponseDto> {
+        // Get username and password từ AuthPayloadDto
+        const {username, password} = body;
+        const salt = await bcrypt.genSalt();
+        const hash = await bcrypt.hash(password, salt)
+        return this.repository.save({
+            username,
+            password: hash,
+            permission: Role.User
         })
     }
 }
