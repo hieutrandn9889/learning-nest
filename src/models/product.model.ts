@@ -3,8 +3,9 @@ export class Product {
     categoryId?: number;
     productName?: string;
     price?: number;
+    description?: string;
 
-    constructor({ id, categoryId, productName, price }) {
+    constructor({ id, categoryId, productName, price, description }) {
         if (id !== null) {
             this.id = id;
         }
@@ -17,5 +18,7 @@ export class Product {
         if (price !== null) {
             this.price = price;
         }
-    }
+        if (description !== undefined)
+            this.description = description;
+        }
 }

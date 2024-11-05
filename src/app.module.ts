@@ -16,6 +16,7 @@ import { jwtConstants } from './constant/constant';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { RolesGuard } from './modules/auth/roles.guard';
+import { ProductModule } from './modules/products/product.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { RolesGuard } from './modules/auth/roles.guard';
     CarModule,
     BrandModule,
     AuthModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [
