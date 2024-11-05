@@ -56,15 +56,20 @@ export class ProductRepository implements IProductRepository {
         return false;
     }
 
-    // page = 2
+     // page = 2 thì nó sẽ hiện id =4,5,6 
+    // vị trí start = page (2) - 1 = 1 * limit 3 => nên có id = 1,2,3
+    // vị trí end = page (2) * 3 = 6 nên sẽ bắt đầu vị trí số 6 => nên có id = 7,8,9
     findProductHome(meta: MetaParams): Product[] {
+        // limit để tối đa 3 sp sau khi gọi
         const limit = 3;
+        // vị trí start and end
         const end = Number(meta.page) * limit;
         if (!meta.search) {
             const start = (Number(meta.page) - 1) * limit;
             const newProducts = this.products.slice(start, end);
             return newProducts;
         } else {
+            // search vị trí 0 đến page 2 => nó sẽ lấy id =1,2,3,4,5,6
             let searchProducts = this.products.slice(0, end);
             return searchProducts.filter(item => item.productName.toUpperCase().indexOf(meta.search.toUpperCase()) !== -1);
         }
