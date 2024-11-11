@@ -32,9 +32,20 @@
 $ npm install
 ```
 
+## Migration
+```bash
+# generate
+$ npm run migration:generate -- db/migrations/CreateRolesTable
+
+# run
+$ npm run migration:run
+
+```
+
 ## Compile and run the project
 
 ```bash
+
 # development
 $ npm run start
 

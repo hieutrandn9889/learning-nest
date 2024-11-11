@@ -17,18 +17,25 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { RolesGuard } from './modules/auth/roles.guard';
 import { ProductModule } from './modules/products/product.module';
+import { dataSourceOptions } from 'db/data-source';
 
 @Module({
   imports: [
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: '',
+    //   database: 'nestjs-api-v1',
+    //   entities: [CategoriesEntity, CarsEntity, AccountsEntity],
+    //   synchronize: true,
+    // }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'nestjs-api-v1',
-      entities: [CategoriesEntity, CarsEntity, AccountsEntity],
-      synchronize: true,
+      // import entities vào dataSourceOptions
+      // vì dataSourceOptions là object
+    ...dataSourceOptions,
+    entities: [CategoriesEntity, CarsEntity, AccountsEntity]
     }),
     JwtModule.register({
       global: true,
