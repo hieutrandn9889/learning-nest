@@ -37,6 +37,8 @@ $ npm install
 # generate
 $ npm run migration:generate -- db/migrations/CreateRolesTable
 
+$ npm run migration:generate -- db/migrations/CreateAllTable
+
 # run
 $ npm run migration:run
 
