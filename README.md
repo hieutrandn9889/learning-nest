@@ -40,6 +40,8 @@ $ npm run migration:generate -- db/migrations/CreateAllTable
 
 $ npm run migration:generate -- db/migrations/CreateRoleTable
 
+$ npm run migration:generate -- db/migrations/CreateUserTable
+
 # run
 $ npm run migration:run
 
