@@ -31,7 +31,7 @@ export class AuthPermission{
 
 
  /**
-    [
+  * [
         {
             "id": 1,
             "name": "hieutran1",
@@ -44,6 +44,12 @@ export class AuthPermission{
         }
         }
     ]
+  * Lấy 4 giá trị
+  * "name": "hieutran1",
+  * "email": "hieutran1@gmail.com",
+  * "name": "ADMIN",
+  * "content": "QUAN_LY"
+  *  
 */
 export class UserDto{
     name: string;
