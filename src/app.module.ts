@@ -18,6 +18,9 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { RolesGuard } from './modules/auth/roles.guard';
 import { ProductModule } from './modules/products/product.module';
 import { dataSourceOptions } from 'db/data-source';
+import RoleEntity from './entities/role.entity';
+import UserEntity from './entities/user.entity';
+import { RoleModule } from './modules/roles/role.module';
 
 @Module({
   imports: [
@@ -35,7 +38,13 @@ import { dataSourceOptions } from 'db/data-source';
       // import entities vào dataSourceOptions
       // vì dataSourceOptions là object
     ...dataSourceOptions,
-    entities: [CategoriesEntity, CarsEntity, AccountsEntity]
+    entities: [
+      CategoriesEntity, 
+      CarsEntity, 
+      AccountsEntity,
+      RoleEntity,
+      UserEntity,
+    ]
     }),
     JwtModule.register({
       global: true,
@@ -48,6 +57,7 @@ import { dataSourceOptions } from 'db/data-source';
     BrandModule,
     AuthModule,
     ProductModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [
