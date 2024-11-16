@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { Public } from 'src/constant/decorator';
 import { RoleService } from './role.service';
 
@@ -6,11 +6,11 @@ import { RoleService } from './role.service';
 export class RoleController {
   constructor(protected readonly roleService: RoleService) { }
 
-  @Get('')
+  @Get('/')
   @Public()
-  async list(): Promise<any[]> {
+  async list(@Query('name') name: string): Promise<any[]> {
     try {
-      const roleRes = await this.roleService.findAll();
+      const roleRes = await this.roleService.findAll(name);
       return roleRes;
     } catch (error){
       return null;
