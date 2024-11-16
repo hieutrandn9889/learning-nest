@@ -33,12 +33,16 @@ export abstract class BaseRepository<
 
         const isFlag: DeleteResult = await this.repository.delete(id);
 
-        // trả lại data khi isFlag.affected === 1 
-        // if (isFlag) {
-        //     return true
-        // }else{
-        //     return false
-        // }
+         /**
+             * trả lại data khi isFlag.affected === 1 
+             *
+             * if (isFlag) {
+             *      return true
+             *
+             * }else{
+             *      return false
+             * }
+         */
         return isFlag.affected === 1;
     }
 
