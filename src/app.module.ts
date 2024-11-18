@@ -22,6 +22,7 @@ import RoleEntity from './entities/role.entity';
 import UserEntity from './entities/user.entity';
 import { RoleModule } from './modules/roles/role.module';
 import { PageModule } from './modules/pages/page.module';
+import { LoginModule } from './modules/logins/login.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { PageModule } from './modules/pages/page.module';
     ProductModule,
     RoleModule,
     PageModule,
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [
