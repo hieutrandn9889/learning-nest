@@ -8,6 +8,6 @@ export enum HttpMessage{
 }
 
 export enum Role{
-    User  = 'ROLE_USER',
-    Admin = 'ROLE_ADMIN',
+    User  = 'USER',
+    Admin = 'ADMIN',
 }
