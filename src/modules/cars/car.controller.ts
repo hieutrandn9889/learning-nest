@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, Res, ValidationPipe } from "@nestjs/common";
 import { Response } from "express";
 import { ResponseData } from "src/global/globalClass";
-import { HttpMessage, HttpStatus, Role } from "src/global/globalEnum";
-import { ResponseType } from "src/global/globalType";
+import { HttpMessage, HttpStatus, Role } from "src/constant/enum";
+import { ResponseType } from "src/constant/type";
 import { Car } from "src/models/car.model";
 import { CarService } from "./car.services";
 import { CarDto } from "src/dto/car.dto";

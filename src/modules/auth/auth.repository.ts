@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthPayloadDto, AuthPermission, AuthResponseDto } from 'src/dto/auth.dto';
 import { AccountsEntity } from 'src/entities/accounts.entity';
-import { Role } from 'src/global/globalEnum';
+import { Role } from 'src/constant/enum';
 import { IAuthRepository } from 'src/interfaces/IAuthRepository';
 import { Repository } from "typeorm";
 import * as bcrypt from 'bcrypt';

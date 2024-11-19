@@ -5,7 +5,7 @@ import { ResponseData } from "src/global/globalClass";
 import { MetaParams, ResponseType } from 'src/constant/type';
 import { Product } from '../../models/product.model';
 import { ProductDto } from 'src/dto/product.dto';
-import { ServerMessage, ServerStatus } from 'src/constant/enum';
+import { HttpMessage, HttpStatus } from 'src/constant/enum';
 import { Public } from 'src/constant/decorator';
 
 @Controller('products')
@@ -16,9 +16,9 @@ export class ProductController {
   @Get()
   getProducts(@Res() res: Response): ResponseType<Product> {
     try {
-      return res.json(new ResponseData(this.productService.findAll(), ServerStatus.OK, ServerMessage.OK));
+      return res.json(new ResponseData(this.productService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS));
     } catch (error) {
-      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
+      return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR));
     }
   }
 
@@ -26,9 +26,9 @@ export class ProductController {
   @Post()
   createProduct(@Body() product: ProductDto, @Res() res: Response): ResponseType<Product> {
     try {
-      return res.json(new ResponseData(this.productService.createProduct(product), ServerStatus.OK, ServerMessage.OK));
+      return res.json(new ResponseData(this.productService.createProduct(product), HttpStatus.SUCCESS, HttpMessage.SUCCESS));
     } catch (error) {
-      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
+      return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR));
     }
   }
 
@@ -36,9 +36,9 @@ export class ProductController {
   @Get('/:id')
   detailProduct(@Param('id') id: number, @Res() res: Response): ResponseType<Product> {
     try {
-      return res.json(new ResponseData(this.productService.findById(id), ServerStatus.OK, ServerMessage.OK));
+      return res.json(new ResponseData(this.productService.findById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS));
     } catch (error) {
-      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
+      return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR));
     }
   }
 
@@ -46,9 +46,9 @@ export class ProductController {
   @Put('/:id')
   updateProduct(@Param('id') id: number, @Body() product: ProductDto, @Res() res: Response): ResponseType<Product> {
     try {
-      return res.json(new ResponseData(this.productService.updateProduct(id, product), ServerStatus.OK, ServerMessage.OK));
+      return res.json(new ResponseData(this.productService.updateProduct(id, product), HttpStatus.SUCCESS, HttpMessage.SUCCESS));
     } catch (error) {
-      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
+      return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR));
     }
   }
 
@@ -56,9 +56,9 @@ export class ProductController {
   @Delete('/:id')
   deleteProduct(@Param('id') id: number, @Res() res: Response): ResponseType<Product> {
     try {
-      return res.json(new ResponseData(this.productService.deleteProduct(id), ServerStatus.OK, ServerMessage.OK));
+      return res.json(new ResponseData(this.productService.deleteProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS));
     } catch (error) {
-      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
+      return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR));
     }
   }
 
@@ -71,9 +71,9 @@ export class ProductController {
     @Res() res: Response,
   ): ResponseType<Product> {
     try {
-      return res.json(new ResponseData(this.productService.findProductHome({ page, search }), ServerStatus.OK, ServerMessage.OK));
+      return res.json(new ResponseData(this.productService.findProductHome({ page, search }), HttpStatus.SUCCESS, HttpMessage.SUCCESS));
     } catch (error) {
-      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
+      return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR));
     }
   }
 }

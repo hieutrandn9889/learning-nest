@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { Role } from 'src/global/globalEnum';
+import { Role } from 'src/constant/enum';
 
 // Decorator for Auth
 export const IS_PUBLIC_KEY = 'isPublic';

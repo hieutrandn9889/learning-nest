@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, ValidationPipe } from "@nestjs/common";
 import { BrandService } from "./brand.service";
 import { ResponseData } from "src/global/globalClass";
-import { HttpMessage, HttpStatus } from "src/global/globalEnum";
+import { HttpMessage, HttpStatus } from "src/constant/enum";
 import { Brand } from "src/models/brand.model";
 import { BrandDto } from "src/dto/brand.dto";
 

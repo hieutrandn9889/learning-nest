@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Res } from "@nestjs/common";
 import { Response } from "express";
 import { ResponseData } from "src/global/globalClass";
-import { HttpMessage, HttpStatus } from "src/global/globalEnum";
-import { ResponseType } from "src/global/globalType";
+import { HttpMessage, HttpStatus } from "src/constant/enum";
+import { ResponseType } from "src/constant/type";
 import { AuthService } from "./auth.services";
 import { AuthPayloadDto, AuthPermission, AuthResponseDto } from "src/dto/auth.dto";
 import { Public } from "src/constant/decorator";

@@ -1,14 +1,13 @@
-export enum ServerStatus {
-    OK = 200,
-    ERROR = 404,
-  };
-  
-  export enum ServerMessage {
-    OK = 'Server Response Success!',
-    ERROR = 'Server Internal Error!',
-  };
-  
-  export enum Role {
-    User = 'USER',
-    Admin = 'ADMIN',
-  }
+export enum HttpStatus{
+  ERROR  = 404,
+  SUCCESS = 200,
+}
+export enum HttpMessage{
+  ERROR  = 'Server Internal Error',
+  SUCCESS = 'Server Response Success',
+}
+
+export enum Role{
+  User  = 'USER',
+  Admin = 'ADMIN',
+}

@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common";
 import { ProductOldService } from "./productOld.service";
 import { ResponseData } from "src/global/globalClass";
-import { HttpMessage, HttpStatus } from "src/global/globalEnum";
+import { HttpMessage, HttpStatus } from "src/constant/enum";
 import { Product } from "src/models/product.model";
 import { ProductDto } from "src/dto/product.dto";
 import { Public } from "src/constant/decorator";
