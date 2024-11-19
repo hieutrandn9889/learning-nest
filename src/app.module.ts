@@ -23,6 +23,8 @@ import UserEntity from './entities/user.entity';
 import { RoleModule } from './modules/roles/role.module';
 import { PageModule } from './modules/pages/page.module';
 import { LoginModule } from './modules/logins/login.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './modules/auth/jwt.strategy';
 
 @Module({
   imports: [
@@ -62,6 +64,7 @@ import { LoginModule } from './modules/logins/login.module';
     RoleModule,
     PageModule,
     LoginModule,
+    PassportModule.register({defaultStrategy:'jwt'})
   ],
   controllers: [AppController],
   providers: [
@@ -75,7 +78,8 @@ import { LoginModule } from './modules/logins/login.module';
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
-    }
+    },
+    JwtStrategy
 
   ],
 })
