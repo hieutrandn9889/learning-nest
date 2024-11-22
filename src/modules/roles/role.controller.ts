@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { Public } from 'src/constant/decorator';
 import { RoleService } from './role.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {diskStorage} from 'multer';
 import { HttpMessage } from 'src/constant/enum';
 import { extname, join } from 'path';
+import {promises as fsPromises} from 'fs';
 
 @Controller('roles')
 export class RoleController {
@@ -42,6 +43,26 @@ export class RoleController {
         message:'File uploaded successfully!',
         filename: file.filename,
       }
+    } catch (error) {
+      return{
+        message: HttpMessage.ERROR,
+        filename: null,
+      }
+    }
+  }
+
+  @Post('/image/delete')
+  @Public()
+  async deleteFile(@Body() body:{filename: string}):Promise<any>{
+
+    try {
+      const filePath = join (__dirname, '..', 'public', body.filename);
+      await fsPromises.unlink(filePath);
+      return{
+        message:'File uploaded successfully!',
+        filename: body.filename,
+      }
+
     } catch (error) {
       return{
         message: HttpMessage.ERROR,
