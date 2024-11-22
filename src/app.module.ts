@@ -25,6 +25,8 @@ import { PageModule } from './modules/pages/page.module';
 import { LoginModule } from './modules/logins/login.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './modules/auth/jwt.strategy';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -64,7 +66,10 @@ import { JwtStrategy } from './modules/auth/jwt.strategy';
     RoleModule,
     PageModule,
     LoginModule,
-    PassportModule.register({defaultStrategy:'jwt'})
+    PassportModule.register({defaultStrategy:'jwt'}),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public')
+    }),
   ],
   controllers: [AppController],
   providers: [
