@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, ValidationPipe } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common";
 import { BrandService } from "./brand.service";
 import { ResponseData } from "src/global/globalClass";
 import { HttpMessage, HttpStatus } from "src/constant/enum";
 import { Brand } from "src/models/brand.model";
 import { BrandDto } from "src/dto/brand.dto";
+import { Public } from "src/constant/decorator";
 
 @Controller('brands')
 export class BrandController {
@@ -11,6 +12,7 @@ export class BrandController {
     constructor(private readonly brandService: BrandService) { }
 
     @Get()
+    @Public()
     getBrands(): ResponseData<Brand[]> {
         try {
             return new ResponseData<Brand[]>(this.brandService.getBrands(), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
@@ -20,6 +22,7 @@ export class BrandController {
     }
 
     @Get('/:id')
+    @Public()
     // @Param('id') id:number ==> mang giá trị là string nên vào this.productService.detailProduct(id) nó đang string nên cần parse sang number
     detailProduct(@Param('id') id: number): ResponseData<Brand> {
         try {
@@ -30,6 +33,7 @@ export class BrandController {
     }
 
     @Post()
+    @Public()
     createProduct(@Body() brandDto: BrandDto): ResponseData<BrandDto> {
 
         try {
@@ -41,6 +45,7 @@ export class BrandController {
     }
 
     @Put('/:id')
+    @Public()
     // truyền 1 param id
     updateProducts(@Body() brandDto: BrandDto, @Param('id') id: number): ResponseData<Brand> {
         try {
@@ -51,6 +56,7 @@ export class BrandController {
     }
 
     @Delete('/:id')
+    @Public()
     // hứng 1 param
     deleteProducts(@Param('id') id: number): ResponseData<boolean> {
         try {

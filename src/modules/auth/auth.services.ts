@@ -32,9 +32,14 @@ export class AuthService {
       //ĐK
       if (!username || !password) return false;
 
-      // Khi signUp k có ID(AuthPayloadDto) nhưng trả về lại có ID(AuthResponseDto)
-      // Tạo 1 đối tượng AuthResponseDto
-      // authRepository với id, username, permission k phải optional
+      /**
+          * Khi signUp k có ID(AuthPayloadDto) nhưng trả về lại có ID(AuthResponseDto)
+          *
+          * Tạo 1 đối tượng AuthResponseDto
+          *
+          * authRepository với id, username, permission k phải optional
+          *     
+      */
       const userDto: AuthResponseDto = new AuthResponseDto(await this.authRepository.signUp(auth));
       return userDto;
    }

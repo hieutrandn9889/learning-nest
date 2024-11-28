@@ -1,12 +1,11 @@
 import { Injectable  } from '@nestjs/common';
 import { BrandDto } from 'src/dto/brand.dto';
-import { ProductDto } from 'src/dto/product.dto';
 import { Brand  } from 'src/models/brand.model';
 
 @Injectable()
 export class BrandService {
     // method: Brand
-    private brands:Brand[]= [
+    private readonly brands:Brand[]= [
         {id:1, categoryId:2, brandDescription:"Nice", brandName:"Honda"},
         {id:2, categoryId:3, brandDescription:"Beautiful", brandName:"Hieu Tran"}
     ]

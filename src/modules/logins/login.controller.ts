@@ -19,13 +19,13 @@ export type SearchByNameReq = {
 
 @Controller('login')
 export class LoginController {
-  constructor(protected readonly roleService: LoginService) {}
+  constructor(protected readonly loginService: LoginService) {}
 
   @Post('/')
   @Public()
   async login(@Body() body: { name: string }): Promise<any> {
     try {
-      const roleRes = await this.roleService.login(body);
+      const roleRes = await this.loginService.login(body);
       return roleRes;
     } catch (error) {
       return null;
