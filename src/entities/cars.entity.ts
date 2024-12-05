@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn , ManyToOne, JoinColumn} from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn , ManyToOne, JoinColumn, OneToMany} from "typeorm";
+import { ColorsEntity } from "./colors.entity";
 import { CategoriesEntity } from "./categories.entity";
 
 @Entity('cars')
@@ -24,4 +25,13 @@ export class CarsEntity extends BaseEntity{
     @ManyToOne(()=> CategoriesEntity)
     @JoinColumn({name:'category_id', referencedColumnName:'id'})
     category: CategoriesEntity;
+
+    /**
+     * lấy ra color xe
+     *
+     * trỏ đến () => ColorsEntity và lấy đc đối tượng car của colors
+   */
+    @OneToMany(() => ColorsEntity, colors => colors.car)
+    @JoinColumn()
+    colors: ColorsEntity[]
 }

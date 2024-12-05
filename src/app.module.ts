@@ -27,6 +27,8 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './modules/auth/jwt.strategy';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ColorsEntity } from './entities/colors.entity';
+import { ColorModule } from './modules/colors/color.module';
 
 @Module({
   imports: [
@@ -50,6 +52,7 @@ import { join } from 'path';
       AccountsEntity,
       RoleEntity,
       UserEntity,
+      ColorsEntity,
     ]
     }),
     JwtModule.register({
@@ -57,6 +60,7 @@ import { join } from 'path';
       secret: jwtConstants.secret,
       signOptions:{ expiresIn: 900000 }
     }),
+    ColorModule,
     ProductOldModule,
     CategoryModule,
     CarModule,

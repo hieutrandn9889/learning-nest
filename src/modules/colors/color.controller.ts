@@ -3,40 +3,40 @@ import { Response } from "express";
 import { ResponseData } from "src/global/globalClass";
 import { HttpMessage, HttpStatus, Role } from "src/constant/enum";
 import { ResponseType } from "src/constant/type";
-import { Car } from "src/models/car.model";
-import { CarService } from "./car.services";
-import { CarDto } from "src/dto/car.dto";
+import { ColorService } from "./color.services";
 import { Roles } from "src/constant/decorator";
+import { Color } from "src/models/color.model";
+import { ColorDto } from "src/dto/color.dto";
 
-//cars
-@Controller('cars')
-export class CarController {
+//colors
+@Controller('colors')
+export class ColorController {
 
     //sử dụng serivce thì nhúng vào
-    constructor(private readonly carService: CarService) { }
+    constructor(private readonly colorService: ColorService) { }
 
-    // Get all car
+    // Get all color
     @Get()
     @Roles(Role.Admin, Role.User)
-    async list(@Res() res: Response): Promise<ResponseType<Car[]>> {
+    async list(@Res() res: Response): Promise<ResponseType<Color[]>> {
         try {
             return res.json(
-                new ResponseData<Car[]>(await this.carService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS),
+                new ResponseData<Color[]>(await this.colorService.findAll(), HttpStatus.SUCCESS, HttpMessage.SUCCESS),
             );
         } catch (error) {
             return res.json(
-                new ResponseData<Car[]>(null, HttpStatus.ERROR, HttpMessage.ERROR),
+                new ResponseData<Color[]>(null, HttpStatus.ERROR, HttpMessage.ERROR),
             );
         }
     }
 
-    // Get a car
+    // Get a color
     @Get('/:id')
     @Roles(Role.Admin, Role.User)
-    async detail(@Param('id') id: number, @Res() res: Response): Promise<ResponseType<Car>> {
+    async detail(@Param('id') id: number, @Res() res: Response): Promise<ResponseType<Color>> {
         try {
             return res.json(
-                new ResponseData(await this.carService.findById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+                new ResponseData(await this.colorService.findById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
             );
         } catch (error) {
             return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
@@ -46,11 +46,10 @@ export class CarController {
 
     //POST
     @Post()
-    @Roles(Role.Admin, Role.User)
-    async create(@Body(new ValidationPipe()) car: CarDto, @Res() res: Response): Promise<ResponseType<Car>> {
+    async create(@Body(new ValidationPipe()) color: ColorDto, @Res() res: Response): Promise<ResponseType<Color>> {
         try {
             return res.json(
-                new ResponseData(await this.carService.create(car), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+                new ResponseData(await this.colorService.create(color), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
             );
         } catch (error) {
             return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
@@ -62,11 +61,11 @@ export class CarController {
     @Put('/:id')
     async update(
         @Param('id') id: number,
-        @Body(new ValidationPipe()) car: CarDto,
-        @Res() res: Response): Promise<ResponseType<Car>> {
+        @Body(new ValidationPipe()) color: ColorDto,
+        @Res() res: Response): Promise<ResponseType<Color>> {
         try {
             return res.json(
-                new ResponseData(await this.carService.update(id, car), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+                new ResponseData(await this.colorService.update(id, color), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
             );
         } catch (error) {
             return res.json(
@@ -79,9 +78,9 @@ export class CarController {
     @Delete('/:id')
     async delete(
         @Param('id') id: number,
-        @Res() res: Response): Promise<ResponseType<Car>> {
+        @Res() res: Response): Promise<ResponseType<Color>> {
         try {
-            const isFlag: boolean = await this.carService.delete(id);
+            const isFlag: boolean = await this.colorService.delete(id);
             if (isFlag) {
                 return res.json(
                     new ResponseData(isFlag, HttpStatus.SUCCESS, HttpMessage.SUCCESS),
@@ -101,7 +100,7 @@ export class CarController {
     async findRelationById(@Param('id')id: number, @Res() res:Response){
         try {
             return res.json(
-                new ResponseData(await this.carService.findRelationById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
+                new ResponseData(await this.colorService.findRelationById(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS)
             );
         } catch (error) {
             return res.json(new ResponseData(null, HttpStatus.ERROR, HttpMessage.ERROR)
