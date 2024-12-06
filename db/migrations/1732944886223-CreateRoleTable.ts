@@ -3,6 +3,7 @@ import RoleEntity from "src/entities/role.entity";
 import { CategoriesEntity } from "src/entities/categories.entity";
 import { CarsEntity } from "src/entities/cars.entity";
 import { ColorsEntity } from "src/entities/colors.entity";
+import UserEntity from "src/entities/user.entity";
 
 export class CreateRoleTable1732944886223 implements MigrationInterface {
     name = 'CreateRoleTable1732944886223'
@@ -22,6 +23,16 @@ export class CreateRoleTable1732944886223 implements MigrationInterface {
                 name: 'STUDENT',
                 content:'HOCVIEN',
             },
+        ])
+
+        const userEntity = queryRunner.connection.getRepository(UserEntity);
+        await userEntity.insert([
+            {
+                id:1,
+                name: 'hieuTranAdmin',
+                email:'hieuTranAdmin@gmail.com',
+                roleId:1
+            }
         ])
 
         const categoriesEntity = queryRunner.connection.getRepository(CategoriesEntity);
