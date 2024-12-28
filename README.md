@@ -62,6 +62,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+
+## Run UT 
+
+```bash
+# unit tests tung file
+$ npm run test:cov -- src/test/app.e2e-spec.ts
+
+# unit tests tung file
+$ npm run test:cov
+
+
 ## Run tests
 
 ```bash
